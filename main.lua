@@ -9,8 +9,8 @@ local widget = require( "widget" )
 
 print("START!")
 
--- This function gets called when the player opens the notification
-function HandleOpenedFromNotification(message, additionalData, isFirstOpen)
+-- This function gets called when the player opens a notification or one is received when the app is open and active.
+function DidReceiveRemoteNotification(message, additionalData, isFirstOpen)
 	if (additionalData and additionalData.discount) then
 		native.showAlert( "Discount!", message, { "OK" } )
 		-- Take player to your game store
@@ -25,7 +25,7 @@ end
 
 local launchArgs = ...
 local GameThrive = require ( "plugin.GameThrivePushNotifications" )
-GameThrive.HandleLaunchArgs(launchArgs, "38cb8448-c5a2-11e3-8258-57d3216d919f", HandleOpenedFromNotification)
+GameThrive.HandleLaunchArgs(launchArgs, "38cb8448-c5a2-11e3-8258-57d3216d919f", DidReceiveRemoteNotification)
 
 
 -- START: Tags button
